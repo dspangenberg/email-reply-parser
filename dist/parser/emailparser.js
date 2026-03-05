@@ -161,8 +161,8 @@ class EmailParser {
     isSignature(line) {
         let text = this.stringReverse(line);
         let regexes = this.options.excludeSignatureSeparators
-            ? RegexList.signatureRegex
-            : [...RegexList.separatorSignatureRegex, ...RegexList.signatureRegex];
+            ? [...RegexList.safeSeparatorSignatureRegex, ...RegexList.signatureRegex]
+            : [...RegexList.separatorSignatureRegex, ...RegexList.safeSeparatorSignatureRegex, ...RegexList.signatureRegex];
         return regexes.some((regex) => {
             return regex.test(text);
         });

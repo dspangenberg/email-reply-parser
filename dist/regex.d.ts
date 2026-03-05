@@ -6,6 +6,7 @@ declare class RegexList {
     RE2: typeof RE2;
     hasRE2: boolean;
     quoteHeadersRegex: RegExp[];
+    safeSeparatorSignatureRegex: RegExp[];
     separatorSignatureRegex: RegExp[];
     signatureRegex: RegExp[];
     /**

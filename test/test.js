@@ -789,6 +789,22 @@ export function test_tricky_unicode_signatures(test) {
   test.done();
 }
 
+export function test_forwarded_message_separator(test) {
+  let email = get_email("email_forwarded_message_separator");
+
+  let fragments = email.getFragments();
+
+  test.equal(2, fragments.length);
+  test.equal(true, /can you please suggest/.test(fragments[0].toString()));
+  test.equal(false, fragments[0].isQuoted());
+  test.equal(false, /Hi Jane Doe/.test(fragments[0].toString()));
+  test.equal(false, /Forwarded message/.test(fragments[0].toString()));
+
+  test.equal("Hi, can you please suggest what I need to do here?\nAre you going to pay the deposit?\nPlease note that I will not be able to proceed with signing the contract unless the deposit-free option that you mentioned is enabled.\n\n\nPlease advise at the earliest.\nThanks,\nJane\n\n", fragments[0].toString());
+
+  test.done();
+}
+
 export function test_tricky_forward_header(test) {
   let email = get_email("email_tricky_17_forward_header");
   
