@@ -22,6 +22,7 @@ class RegexList {
   RE2: typeof RE2;
   hasRE2: boolean;
   quoteHeadersRegex: RegExp[];
+  safeSeparatorSignatureRegex: RegExp[];
   separatorSignatureRegex: RegExp[];
   signatureRegex: RegExp[];
 
@@ -65,13 +66,18 @@ class RegexList {
       /^-{1,12} ?(U|u)rsprüngliche (N|n)achricht ?-{0,12}$/i
     ]);
 
+    this.safeSeparatorSignatureRegex = this.buildSafeRegexes([
+      /^________________________________$/, // Separator
+      /^-{5,}\s+\S/ // Separator (e.g. "---------- Forwarded message ---------")
+    ]);
+
+    // aggresive separators that cause false-positives
     this.separatorSignatureRegex = this.buildSafeRegexes([
       /^\s*-{2,4}$/, // Separator
       /^\s*_{2,4}$/, // Separator
       /^-- $/, // Separator
       /^\+{2,4}$/, // Separator
-      /^\={2,4}$/, // Separator
-      /^________________________________$/ // Separator
+      /^\={2,4}$/ // Separator
     ]);
 
     this.signatureRegex = this.buildSafeRegexes([
