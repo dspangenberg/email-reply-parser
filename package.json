@@ -42,7 +42,7 @@
     "underscore": "v1.13.6"
   },
   "peerDependencies": {
-    "re2": "1.22.1"
+    "re2": "1.22.3"
   },
   "peerDependenciesMeta": {
     "re2": {
